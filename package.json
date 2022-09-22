@@ -1,0 +1,19 @@
+{
+  "name": "github-fetcher",
+  "version": "1.0.0",
+  "description": "view repos from a population of users",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sjmoody/github-fetcher.git"
+  },
+  "author": "Steven Moody",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sjmoody/github-fetcher/issues"
+  },
+  "homepage": "https://github.com/sjmoody/github-fetcher#readme"
+}
