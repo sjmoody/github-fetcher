@@ -1,6 +1,6 @@
 [x] Install Backend dependencies
 [x] github helper function to return results to command line for one user
-[ ] Set up Mongoose and schema
+[x] Set up Mongoose and schema
 [ ] Basic working Express server
 [ ] Stub out POST and GET requests in server
 [ ] Express route for POST request (gets from gh and saves to database)
