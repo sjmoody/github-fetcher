@@ -4,7 +4,7 @@ const config = require('../config.js')
 // Create github script here. Should use axios to collect my repos and console log them
 // Experiment to use helpers/index.js not sure if this works
 let getReposByUsername = (username) => {
-  console.log(`getting repos for ${username}`)
+  console.log(`gh: getting repos for ${username}`)
 
   let options = {
     baseURL: `https://api.github.com`,
@@ -16,12 +16,13 @@ let getReposByUsername = (username) => {
   };
   return axios(options)
     .then((results) => {
-      console.log(results);
-      return results;
+      // console.log(results);
+      console.log(`results returned from github: ${results.length}`)
+      return results.data;
     })
 }
 
-getReposByUsername("sjmoody");
+// getReposByUsername("sjmoody");
 
 
 module.exports.getReposByUsername = getReposByUsername

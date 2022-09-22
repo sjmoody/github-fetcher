@@ -1,7 +1,8 @@
 const express = require('express')
 const app = express()
 const port = 3000
-const db = ('./database')
+const db = ('./database') //db.saveAll(repos)
+const gh = ('./helpers/github.js') // gh.getReposByUsername
 
 app.use(express.json())
 
@@ -15,7 +16,15 @@ app.get('/api/repos', (req, res) => {
 
 app.post('/api/repos', (req, res) => {
   console.log(`Expect username: ${req.body}`)
-  res.send("TODO: get repos from github and then save in database")
+  gh.getReposByUsername(req.body.username) // I expect a promise
+  .then((repos) => {
+    return db.saveAll(repos)
+  })
+  .then((results) => {
+    res.send(results)
+  })
+  .catch(err => console.log(`Error: ${err}`))
+
 
 })
 

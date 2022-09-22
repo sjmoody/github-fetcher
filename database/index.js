@@ -1,7 +1,8 @@
 const mongoose = require('mongoose')
+const gh = require('../helpers/github.js')
 
 // Call these outside of the save function. Unclear to me how these get run in this context.
-await mongoose.connect('mongodb://localhost:27017/gh-repos');
+mongoose.connect('mongodb://localhost:27017/gh-repos');
 
 const repoSchema = new mongoose.Schema({
   id: String,
@@ -24,8 +25,23 @@ const repoSchema = new mongoose.Schema({
 // Then compile the schema into a Model
 const Repo = mongoose.model('Repo', repoSchema);
 
+ // hardcode query to gh and then save
+let testLoad = () => {
+  let username = 'sjmoody'
+  console.log("starting testLoad: will get repos")
+  gh.getReposByUsername(username)
+  .then((repos) => {
+    console.log(repos[0])
+    console.log("These are the repos in testLoad")
+    return saveAll(repos);
+  })
+  .then((results) => {
+    return console.log("finished in testLoad")
+  })
+};
+
 let saveAll = (repos) => {
-  console.log(`Intend to save ${repos.length} repos`)
+  console.log(`in saveAll; Intend to save ${repos.length} repos`)
 // Previous I did a for var r of repos, constructed a doc, constructed a query, called the query followed by a then
 
   let promises = repos.map((repo) => {
@@ -57,16 +73,17 @@ let saveAll = (repos) => {
   console.log(promises);
   Promise.all(promises)
     .then((values) => {
-      console.log(values);
+      // console.log(values);
       return values;
     })
 
 
 }
 
+testLoad();
 
-
-module.exports.saveAll = save All
+module.exports.saveAll = saveAll
+module.exports.testLoad = testLoad
 
 
 // const steven = new Repo({
